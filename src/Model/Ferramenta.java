@@ -21,6 +21,4 @@ public class Ferramenta {
     public Ferramenta() {
         this.dao = new FerramentaDAO();
     }
-    
-    
 }
