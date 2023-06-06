@@ -2,7 +2,7 @@ package DAO;
 
 import Model.Database;
 import java.util.ArrayList;
-import Model.Ferramenta;
+import Model.Amigo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +16,10 @@ import java.sql.Statement;
  *
  * @author lucas
  */
-public class FerramentaDAO {
-    public static ArrayList<Ferramenta> MinhaLista = new ArrayList<Ferramenta>();
+public class AmigoDAO {
+    public static ArrayList<Amigo> MinhaLista = new ArrayList<Amigo>();
 
-    public FerramentaDAO() {
+    public AmigoDAO() {
     }
 
     public int getMaiorID() throws SQLException {
@@ -27,9 +27,10 @@ public class FerramentaDAO {
 
         try {
             Statement stmt = Database.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM ferramentas");
+            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM amigos");
 
             res.next();
+
             maiorID = res.getInt("id");
 
             stmt.close();
@@ -40,26 +41,24 @@ public class FerramentaDAO {
         return maiorID;
     }
 
-    public ArrayList<Ferramenta> getMinhaLista() {
+    public ArrayList<Amigo> getMinhaLista() {
         MinhaLista.clear();
 
         try {
             Statement stmt = Database.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM ferramentas");
+            ResultSet res = stmt.executeQuery("SELECT * FROM amigos");
 
             while (res.next()) {
                 int id = res.getInt("id");
                 String nome = res.getString("nome");
-                String marca = res.getString("marca");
-                int quantidade = res.getInt("quantidade");
-                int custo = res.getInt("custo");
+                String email = res.getString("email");
+                String telefone = res.getString("telefone");
 
-                Ferramenta objeto = new Ferramenta();
+                Amigo objeto = new Amigo();
                 objeto.setId(id);
                 objeto.setNome(nome);
-                objeto.setMarca(marca);
-                objeto.setQuantidade(quantidade);
-                objeto.setCusto(custo);
+                objeto.setEmail(email);
+                objeto.setTelefone(telefone);
 
                 MinhaLista.add(objeto);
             }
@@ -72,17 +71,16 @@ public class FerramentaDAO {
         return MinhaLista;
     }
 
-    public boolean InsertFerramentaDB(Ferramenta objeto) {
-        String sql = "INSERT INTO ferramentas(id,nome,marca,quantidade,custo) VALUES(?,?,?,?,?)";
+    public boolean InsertAmigoDB(Amigo objeto) {
+        String sql = "INSERT INTO amigos(id,nome,email,telefone) VALUES(?,?,?,?)";
 
         try {
             PreparedStatement stmt = Database.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getId());
             stmt.setString(2, objeto.getNome());
-            stmt.setString(3, objeto.getMarca());
-            stmt.setInt(4, objeto.getQuantidade());
-            stmt.setInt(5, objeto.getCusto());
+            stmt.setString(3, objeto.getEmail());
+            stmt.setString(4, objeto.getTelefone());
 
             stmt.execute();
             stmt.close();
@@ -95,11 +93,11 @@ public class FerramentaDAO {
 
     }
 
-    public boolean DeleteFerramentaDB(int id) {
+    public boolean DeleteAmigoDB(int id) {
         try {
             Statement stmt = Database.getConexao().createStatement();
 
-            stmt.executeUpdate("DELETE FROM ferramentas WHERE id = " + id);
+            stmt.executeUpdate("DELETE FROM amigos WHERE id = " + id);
             stmt.close();
         } catch (SQLException erro) {
         }
@@ -107,18 +105,18 @@ public class FerramentaDAO {
         return true;
     }
 
-    public boolean UpdateFerramentaDB(Ferramenta objeto) {
+    // Edita um aluno espec�fico pelo seu campo ID
+    public boolean UpdateAmigoDB(Amigo objeto) {
 
-        String sql = "UPDATE ferramentas set nome = ? ,marca = ? ,quantidade = ?, custo = ? WHERE id = ?";
+        String sql = "UPDATE amigos set nome = ? ,email = ? ,telefone = ? WHERE id = ?";
 
         try {
             PreparedStatement stmt = Database.getConexao().prepareStatement(sql);
 
             stmt.setString(1, objeto.getNome());
-            stmt.setString(2, objeto.getMarca());
-            stmt.setInt(3, objeto.getQuantidade());
-            stmt.setInt(4, objeto.getCusto());
-            stmt.setInt(5, objeto.getId());
+            stmt.setString(2, objeto.getEmail());
+            stmt.setString(3, objeto.getTelefone());
+            stmt.setInt(4, objeto.getId());
 
             stmt.execute();
             stmt.close();
@@ -131,21 +129,20 @@ public class FerramentaDAO {
 
     }
 
-    public Ferramenta carregaFerramenta(int id) {
-        Ferramenta objeto = new Ferramenta();
+    public Amigo carregaAmigo(int id) {
+        Amigo objeto = new Amigo();
 
         objeto.setId(id);
 
         try {
             Statement stmt = Database.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM ferramentas WHERE id = " + id);
+            ResultSet res = stmt.executeQuery("SELECT * FROM amigos WHERE id = " + id);
 
             res.next();
 
             objeto.setNome(res.getString("nome"));
-            objeto.setMarca(res.getString("marca"));
-            objeto.setQuantidade(res.getInt("quantidade"));
-            objeto.setCusto(res.getInt("custo"));
+            objeto.setEmail(res.getString("email"));
+            objeto.setTelefone(res.getString("telefone"));
 
             stmt.close();
         } catch (SQLException erro) {

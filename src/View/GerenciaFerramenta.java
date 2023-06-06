@@ -299,6 +299,8 @@ public class GerenciaFerramenta extends javax.swing.JFrame {
 
                 this.objetoFerramenta.setId(id);
 
+                String nomeFerramentaApagada = this.objetoFerramenta.getDao().carregaFerramenta(id).getNome();
+
                 if (this.objetoFerramenta.DeleteFerramentaDB()) {
                     this.c_nome.setText("");
                     this.c_quantidade.setText("");
@@ -306,7 +308,7 @@ public class GerenciaFerramenta extends javax.swing.JFrame {
                     this.c_custo.setText("");
 
                     JOptionPane.showMessageDialog(rootPane,
-                            "Ferramenta " + this.objetoFerramenta.getNome() + " apagado com sucesso!");
+                            "Ferramenta " + nomeFerramentaApagada + " apagado com sucesso!");
                 }
 
             }
