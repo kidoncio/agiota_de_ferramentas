@@ -205,6 +205,7 @@ public class GerenciaAluno extends javax.swing.JFrame {
             if (this.c_fase.getText().length() <= 0) {
                 throw new Mensagens("Fase deve ser n�mero e maior que zero.");
             } else {
+                
                 fase = Integer.parseInt(this.c_fase.getText());
             }
 

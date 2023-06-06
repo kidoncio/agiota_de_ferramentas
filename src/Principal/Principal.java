@@ -5,8 +5,9 @@ import View.TelaPrincipal;
 public class Principal {
 
     public static void main(String[] args) {
-        TelaPrincipal objetotela = new TelaPrincipal();
-        objetotela.setVisible(true);
+        TelaPrincipal objetoTela = new TelaPrincipal();
+
+        objetoTela.setVisible(true);
     }
     
 }
