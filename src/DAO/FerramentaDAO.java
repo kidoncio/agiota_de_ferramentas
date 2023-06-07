@@ -17,7 +17,7 @@ import java.sql.Statement;
  * @author lucas
  */
 public class FerramentaDAO {
-    public static ArrayList<Ferramenta> MinhaLista = new ArrayList<Ferramenta>();
+    public static ArrayList<Ferramenta> MinhaLista = new ArrayList<>();
 
     public FerramentaDAO() {
     }

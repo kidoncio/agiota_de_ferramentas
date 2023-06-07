@@ -39,7 +39,7 @@ public class GerenciaAmigo extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         c_telefone = new javax.swing.JTextField();
 
-        setTitle("Gerenciamento de Alunos");
+        setTitle("Gerenciamento de amigos");
         setResizable(false);
 
         jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(

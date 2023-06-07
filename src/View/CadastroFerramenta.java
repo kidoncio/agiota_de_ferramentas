@@ -3,6 +3,7 @@ package View;
 import Model.Ferramenta;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 public class CadastroFerramenta extends javax.swing.JFrame {
 
     private Ferramenta objetoFerramenta;
+    private ArrayList<Ferramenta> ferramentas = new Ferramenta().getMinhaLista();
 
     public CadastroFerramenta() {
         initComponents();
@@ -159,6 +161,18 @@ public class CadastroFerramenta extends javax.swing.JFrame {
             if (this.c_nome.getText().length() < 2) {
                 throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
             } else {
+                Boolean existe = false;
+
+                for (int i = 0; i < ferramentas.size(); i++) {
+                    if (ferramentas.get(i).getNome().equals(this.c_nome.getText())) {
+                        existe = true;
+                    }
+                }
+
+                if (existe) {
+                    throw new Mensagens("Ferramenta já cadastrada.");
+                }
+
                 nome = this.c_nome.getText();
             }
 

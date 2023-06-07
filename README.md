@@ -42,21 +42,21 @@ CREATE TABLE IF NOT EXISTS ferramentas
 CREATE TABLE IF NOT EXISTS emprestimos
 (
     id   int           not null,
-    data_emprestimo date          null,
-    data_devolucao  date          null,
-    id_ferramentas  int           null,
-    id_amigos       int           null,
+    emprestimo date          null,
+    devolucao  date          null,
+    id_ferramenta  int           null,
+    id_amigo       int           null,
     quantidade      int default 1 null,
     primary key (id),
-    constraint id_amigos
-        foreign key (id_amigos) references amigos (id),
-    constraint id_ferramentas
-        foreign key (id_ferramentas) references ferramentas (id)
+    constraint id_amigo
+        foreign key (id_amigo) references amigos (id),
+    constraint id_ferramenta
+        foreign key (id_ferramenta) references ferramentas (id)
 );
 
-CREATE index id_amigos_idx
-    ON emprestimos (id_amigos);
+CREATE index id_amigo_idx
+    ON emprestimos (id_amigo);
 
-CREATE index id_ferramentas_idx
-    ON emprestimos (id_ferramentas);
+CREATE index id_ferramenta_idx
+    ON emprestimos (id_ferramenta);
 ```

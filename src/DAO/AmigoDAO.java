@@ -105,7 +105,6 @@ public class AmigoDAO {
         return true;
     }
 
-    // Edita um aluno espec�fico pelo seu campo ID
     public boolean UpdateAmigoDB(Amigo objeto) {
 
         String sql = "UPDATE amigos set nome = ? ,email = ? ,telefone = ? WHERE id = ?";
@@ -147,6 +146,7 @@ public class AmigoDAO {
             stmt.close();
         } catch (SQLException erro) {
         }
+
         return objeto;
     }
 }

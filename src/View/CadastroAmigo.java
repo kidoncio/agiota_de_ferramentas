@@ -3,6 +3,7 @@ package View;
 import Model.Amigo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 public class CadastroAmigo extends javax.swing.JFrame {
 
     private Amigo objetoAmigo;
+    private ArrayList<Amigo> amigos = new Amigo().getMinhaLista();
 
     public CadastroAmigo() {
         initComponents();
@@ -139,6 +141,18 @@ public class CadastroAmigo extends javax.swing.JFrame {
             if (this.c_nome.getText().length() < 2) {
                 throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
             } else {
+                Boolean existe = false;
+
+                for (Amigo amigo : amigos) {
+                    if (amigo.getNome().equals(this.c_nome.getText())) {
+                        existe = true;
+                    }
+                }
+
+                if (existe) {
+                    throw new Mensagens("Amigo já cadastrado.");
+                }
+
                 nome = this.c_nome.getText();
             }
 
