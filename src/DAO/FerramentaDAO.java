@@ -99,6 +99,11 @@ public class FerramentaDAO {
         try {
             Statement stmt = Database.getConexao().createStatement();
 
+            stmt.executeUpdate("DELETE FROM emprestimos WHERE id_ferramenta = " + id);
+            stmt.close();
+
+            stmt = Database.getConexao().createStatement();
+
             stmt.executeUpdate("DELETE FROM ferramentas WHERE id = " + id);
             stmt.close();
         } catch (SQLException erro) {

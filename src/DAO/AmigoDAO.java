@@ -97,6 +97,11 @@ public class AmigoDAO {
         try {
             Statement stmt = Database.getConexao().createStatement();
 
+            stmt.executeUpdate("DELETE FROM emprestimos WHERE id_amigo = " + id);
+            stmt.close();
+
+            stmt = Database.getConexao().createStatement();
+
             stmt.executeUpdate("DELETE FROM amigos WHERE id = " + id);
             stmt.close();
         } catch (SQLException erro) {
