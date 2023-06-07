@@ -358,14 +358,14 @@ public class GerenciaEmprestimo extends javax.swing.JFrame {
             }
 
             if (this.c_devolucao.getText().length() > 0) {
-                if (this.c_emprestimo.getText().length() != 10) {
-                    throw new Mensagens("O formato da data de empréstimo deve ser dd/mm/aaaa");
+                if (this.c_devolucao.getText().length() != 10) {
+                    throw new Mensagens("O formato da data de devolução deve ser dd/mm/aaaa");
                 } else {
                     try {
-                        emprestimo = new SimpleDateFormat("dd/MM/yyyy").parse(this.c_emprestimo.getText());
+                        devolucao = new SimpleDateFormat("dd/MM/yyyy").parse(this.c_devolucao.getText());
                     } catch (ParseException ex) {
                         Logger.getLogger(CadastroEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
-                        throw new Mensagens("O formato da data de empréstimo deve ser dd/mm/aaaa");
+                        throw new Mensagens("O formato da data de devolução deve ser dd/mm/aaaa");
                     }
                 }
             }
@@ -387,6 +387,8 @@ public class GerenciaEmprestimo extends javax.swing.JFrame {
             if (this.c_devolucao.getText().length() > 0) {
                 this.objetoEmprestimo.setDevolucao(devolucao);
             }
+
+            System.out.println("Devolvido " + this.objetoEmprestimo.getDevolucao().toString());
 
             if (this.objetoEmprestimo.UpdateEmprestimoDB()) {
                 this.limpaCampos();
@@ -434,36 +436,11 @@ public class GerenciaEmprestimo extends javax.swing.JFrame {
 
             int indexAmigo = this.amigos.indexOf(amigo);
 
-            String outputPattern = "dd/MM/yyyy";
-
-            DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-            DateFormat outputFormat = new SimpleDateFormat(outputPattern);
-
-            String emprestimoToString = "";
-
-            try {
-                Date date = inputFormat.parse(emprestimo);
-                emprestimoToString = outputFormat.format(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            String devolucaoToString = "";
-
-            if (devolucao != null && devolucao.length() > 0) {
-                try {
-                    Date date = inputFormat.parse(devolucao);
-                    devolucaoToString = outputFormat.format(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
             this.c_id_ferramenta.setSelectedIndex(indexFerramenta);
             this.c_id_amigo.setSelectedIndex(indexAmigo);
             this.c_quantidade.setText(quantidade);
-            this.c_emprestimo.setText(emprestimoToString);
-            this.c_devolucao.setText(devolucaoToString);
+            this.c_emprestimo.setText(emprestimo);
+            this.c_devolucao.setText(devolucao);
         }
     }// GEN-LAST:event_jTableEmprestimoMouseClicked
 
@@ -528,8 +505,27 @@ public class GerenciaEmprestimo extends javax.swing.JFrame {
 
             String devolucaoToString = "";
 
+            String outputPattern = "dd/MM/yyyy";
+
+            DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+            String emprestimoToString = "";
+
+            try {
+                Date date = inputFormat.parse(emprestimo.getEmprestimo().toString());
+                emprestimoToString = outputFormat.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             if (devolucao != null) {
-                devolucaoToString = devolucao.toString();
+                try {
+                    Date date = inputFormat.parse(devolucao.toString());
+                    devolucaoToString = outputFormat.format(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             Object[] row = new Object[] {
@@ -537,7 +533,7 @@ public class GerenciaEmprestimo extends javax.swing.JFrame {
                     ferramenta.getNome(),
                     amigo.getNome(),
                     emprestimo.getQuantidade(),
-                    emprestimo.getEmprestimo().toString(),
+                    emprestimoToString,
                     devolucaoToString
             };
 

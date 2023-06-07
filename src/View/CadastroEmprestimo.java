@@ -41,12 +41,18 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         if (this.amigos.size() == 0) {
             JOptionPane.showMessageDialog(null, "Cadastre um amigo antes de cadastrar um empréstimo.");
             this.setVisible(false);
+
+            return;
         }
 
         if (this.ferramentas.size() == 0) {
             JOptionPane.showMessageDialog(null, "Cadastre uma ferramenta antes de cadastrar um empréstimo.");
             this.setVisible(false);
+
+            return;
         }
+
+        this.setVisible(true);
     }
 
     /**
