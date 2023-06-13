@@ -21,6 +21,7 @@ import java.sql.Statement;
  * @author lucas
  */
 public class EmprestimoDAO {
+
     public static ArrayList<Emprestimo> MinhaLista = new ArrayList<Emprestimo>();
 
     public EmprestimoDAO() {
@@ -191,7 +192,6 @@ public class EmprestimoDAO {
                 stmt.setDate(2, null);
             }
 
-            stmt.setDate(2, new Date(objeto.getDevolucao().getTime()));
             stmt.setInt(3, objeto.getQuantidade());
             stmt.setInt(4, objeto.getId_amigo());
             stmt.setInt(5, objeto.getId_ferramenta());
