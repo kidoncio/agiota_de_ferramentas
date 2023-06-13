@@ -50,7 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Interface de Teste");
+        setTitle("Agiota de Ferramentas");
 
         jLabel1.setText("- Cadastre os seus amigos");
 
